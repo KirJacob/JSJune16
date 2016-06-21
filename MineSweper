@@ -1,0 +1,169 @@
+<head>
+
+<style>
+.main{
+ border:5px solid blue;
+ font-size:50px;
+ color:green;
+}
+td{
+ border:1px solid grey;
+ text-align:center;
+}
+.cursor2{
+ color:red;
+ background-color:lightyellow;
+}
+.cursor{
+ color:blue;
+  background-color:lightblue;
+}
+.manage{
+ border:5px solid grey;
+ font-size:30px;
+ color:grey;
+}
+button{
+ font-size:40px;
+}
+</style>
+
+<script>
+ var x=0;
+ var y=0;
+ var array;
+ var arrayShow;
+
+function start(){
+ array=createArray(10);
+ arrayShow=createArray(10);
+ array=createBombs(5,array);
+ document.getElementById('tab').innerHTML=generateField();
+}
+function setNum(){
+  setNumbers(10,10,array);
+  document.getElementById('tab').innerHTML=generateField();
+}
+function right(){
+ if (y!=9) y+=1;
+document.getElementById('tab').innerHTML=generateField();
+}
+function left(){
+ if (y!=0) y-=1;
+document.getElementById('tab').innerHTML=generateField();
+}
+function up(){
+ if (x!=0) x-=1;
+document.getElementById('tab').innerHTML=generateField();
+}
+function down(){
+ if (x!=9) x+=1;
+document.getElementById('tab').innerHTML=generateField();
+}
+function set(){
+ array[x][y]='ss';
+}
+function dig(){
+ arrayShow[x][y]='1';
+}
+function unset(){
+ array[x][y]='00';
+}
+
+function createArray(number){
+ var array = new Array(10);
+ for (i=0;i<=9;i++){
+  array[i]= new Array(10);
+ }
+ for (j=0;j<=9;j++)
+  for (k=0;k<=9;k++)
+   array[j][k]='00';
+ return array;
+}
+function createBombs(occurence,array){
+ var randNumber;
+ for (j=0;j<=9;j++)
+  for (k=0;k<=9;k++){
+   randNumber=Math.floor((Math.random() * occurence) + 1);
+   if (randNumber==1) array[j][k]='ss';
+  }
+ return array;
+}
+function calculateBombs(xp,yp,arr){
+ var xs,xf,ys,yf;
+ var counter=0;
+ if (xp!=0) xs=xp-1;
+ else xs=0;
+ if (xp!=9) xf=xp+1;
+ else xf=9;
+ if (yp!=0) ys=yp-1;
+ else ys=0;
+ if (yp!=9) yf=yp+1;
+ else yf=9;
+ for (ix=xs;ix<=xf;ix++)
+  for (iy=ys;iy<=yf;iy++){
+    if (array[ix][iy]=='ss') counter+=1;
+ }
+ if (array[xp][yp]=='ss') counter-=1;
+ <!--> return '['+xs+','+xf+']['+ys+','+yf+']';<-->
+ return counter;
+}
+function setNumbers(xsize,ysize,arr){
+ for (i=0;i<xsize;i++)
+  for (j=0;j<ysize;j++){
+    if (arr[i][j]!='ss') arr[i][j]='0'+calculateBombs(i,j,arr);
+  }
+}
+
+function generateField(){
+ var html='';
+ var tempStr='';
+ var showStr='oo';
+ html += '<table class="main">';
+ for (i=0;i<=9;i++){
+  html += '<tr>';
+  for (j=0;j<=9;j++){
+    if (arrayShow[i][j]=='1'){
+    if (array[i][j]=='ss') tempStr=' class="cursor"';
+    if ((i==x)&&(j==y)){
+     tempStr=' class="cursor2"';
+     html += '<td'+tempStr+'>' + 'xx' + '</td>';
+    }
+    html += '<td'+tempStr+'>' + array[i][y] + '</td>';
+    tempStr='';
+  }else{
+    html += '<td'+tempStr+'>' + '__' + '</td>';
+  }
+  html +='</tr>';
+ }
+ html=html+'</table>';
+ return html;
+}
+
+</script>
+
+</head>
+
+<body>
+  <div id='tab'>
+ </div>
+
+ <table class='manage'>
+  <tr>
+   <td><button onclick='set()'>Set</button></td>
+   <td><button onclick='up()'>Up</button></td>
+   <td><button onclick='unset()'>Unset</button></td>
+  </tr>
+  <tr>
+   <td><button onclick='left()'>Left</button></td>
+   <td><button onclick='start()'>Start</button></td>
+   <td><button onclick='right()'>Right</button></td>
+  </tr>
+  <tr>
+   <td><button onclick='setNum()'>SetNum</button></td>
+   <td><button onclick='down()'>Down</button></td>
+   <td><button onclick='dig()'>DIG</button></td>
+  </tr>
+ </table>
+
+</body>
