@@ -62,8 +62,8 @@ button{font-size:60px;}
 </style>
 
 <script>
- var fieldSize=8;
- var density = 8;
+ var fieldSize=20;
+ var density = 15;
  var x=0;
  var y=0;
  var array;
@@ -80,8 +80,8 @@ function open(arr,xc,yc){
    return true;
  } else return false;
 }
-function logWrite(var1,var2,var3,var4,var5){
-  logInfo=logInfo+" . {"+var1+":"+var2+":"+var3+":["+var4+","+var5+"]}";
+function logWrite(var1,var2,var3){
+  logInfo=logInfo+".{"+var1+":"+var2+":"+var3+"}  ";
   /*document.getElementById('dbug').innerHTML=logInfo;*/
 }
 function arrayLogWrite(var8){
@@ -90,6 +90,7 @@ function arrayLogWrite(var8){
 }
 function showWrite(var6,var7){
   logInfo=logInfo+"("+var6+","+var7+")";
+  document.getElementById('dbug').innerHTML=logInfo;
 }
 function getPoints(depth){
  var countS=0;
@@ -112,58 +113,53 @@ function getPoints(depth){
    yo=arrayT[counter-1][j][1];
    
    if (array[xo][yo]=='00'){
-   logWrite(counter,j,countS,xo,yo);
 
    if (xo!=(fieldSize-1))
     if (arrayShow[xo+1][yo]!='1'){
-      
-       if (array[xo+1][yo]=='00')
+       if (array[xo+1][yo]=='00'){
         if (countS==0) arrayT[counter]=[[xo+1,yo]];
-         else arrayT[counter][countS]=[xo+1,yo];
-       
+        else arrayT[counter][countS]=[xo+1,yo];
+        countS++;
+        opened=1;
+       }
        arrayShow[xo+1][yo]='1';
        showWrite(xo+1,yo);
-       countS++;
-       opened=1;
      }
 
    if (yo!=(fieldSize-1))
     if (arrayShow[xo][yo+1]!='1'){
-
-       if (array[xo][yo+1]=='00')
+       if (array[xo][yo+1]=='00'){
         if (countS==0) arrayT[counter]=[[xo,yo+1]];
-         else arrayT[counter][countS]=[xo,yo+1];
-
+        else arrayT[counter][countS]=[xo,yo+1];
+        countS++;
+        opened=1;
+       }
        arrayShow[xo][yo+1]='1';
        showWrite(xo,yo+1);
-       countS++;
-       opened=1;
      }
 
    if (xo!=0)
     if ((arrayShow[xo-1][yo]!='1')){
-      
-      if (array[xo-1][yo]=='00')
+      if (array[xo-1][yo]=='00'){
        if (countS==0) arrayT[counter]=[[xo-1,yo]]
-        else arrayT[counter][countS]=[xo-1,yo];
-
-       arrayShow[xo-1][yo]='1';
-       showWrite(xo-1,yo);
-       counS++;
+       else arrayT[counter][countS]=[xo-1,yo];
+       countS++;
        opened=1;
+      }
+      arrayShow[xo-1][yo]='1';
+      showWrite(xo-1,yo);
    }
 
    if (yo!=0)
      if (arrayShow[xo][yo-1]!='1'){
-
-      if (array[xo][yo-1]=='00')
+      if (array[xo][yo-1]=='00'){
        if (countS==0) arrayT[counter]=[[xo,yo-1]]
-         else arrayT[counter][countS]=[xo,yo-1];
-      
+       else arrayT[counter][countS]=[xo,yo-1];
+       countS++; 
+       opened=1;
+      }
      arrayShow[xo][yo-1]='1';
      showWrite(xo,yo-1);
-     countS++; 
-     opened=1;
    }
    
    if ((yo!=0)&&(xo!=0)) 
@@ -188,7 +184,8 @@ function getPoints(depth){
       }
 
    }
-  logWrite(counter,j,countS,xo,yo);
+  logWrite(counter,j,countS);
+ }
  return arrayT[depth];
 }
 function points(){
@@ -197,7 +194,6 @@ function points(){
  do{
  getPoints(counter);
  document.getElementById('tab').innerHTML=generateField();
- /*document.getElementById('dots').innerHTML=arrayT[counter];*/
  arrayLogWrite(arrayT[counter]);
  counter++;
  }while(opened!=0);
