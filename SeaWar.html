@@ -1,6 +1,10 @@
 <head>
 
 <style>
+.zero{
+ color:darkgrey;
+ background-color:lightgrey;
+}
 .main{
  border:5px solid blue;
  font-size:40px;
@@ -28,6 +32,7 @@ button{
  var y=0;
  var arrayOne=createArray(10);
  var arrayTwo=createArray(10);
+ var ships = [4,3,3,2,2,2,1,1,1,1];
 
 function start(){
 document.getElementById('tabOne').innerHTML=generateField(arrayOne,x,y);
@@ -50,6 +55,15 @@ function down(){
  x+=1;
 document.getElementById('tabOne').innerHTML=generateField(arrayOne,x,y);
 }
+
+function ships(){
+ setShip(4);
+}
+
+function setShip(shipSize){
+ 
+    randNumber=Math.floor((Math.random() * occurence) + 1);
+}
 function createArray(number){
  var array = new Array(10);
  for (i=0;i<=9;i++){
@@ -63,14 +77,19 @@ function createArray(number){
 function generateField(arrayV,posx,posy){
  var html='';
  var tempStr='';
- arrayV[posx][posy] = 'xx';
  html += '<table class="main">';
  for (i=0;i<=9;i++){
   html += '<tr>';
   for (j=0;j<=9;j++){
-    if (arrayV[i][j]=='xx') tempStr=' class="cursor"';
-    html += '<td'+tempStr+'>' + '__' + '</td>';
-    tempStr='';
+    if ((i==x)&&(j==y)){
+     tempStr=' class="cursor"';
+     html += '<td'+tempStr+'>' + 'xx' + '</td>';
+    }
+    else {
+     tempStr=' class="zero"';
+     html += '<td'+tempStr+'>' + arrayOne[i][j] + '</td>';
+    }
+    tempStr='';i
   }
   html +='</tr>';
  }
@@ -96,9 +115,9 @@ function generateField(arrayV,posx,posy){
 
  <table class='manage'>
   <tr>
-   <td></td>
+   <td><button onclick='ships()'>Ships</button></td>
    <td><button onclick='up()'>Up</button></td>
-   <td></td>
+   <td><button onclick='up()'>Shoot</button></td>
   </tr>
   <tr>
    <td><button onclick='left()'>Left</button></td>
