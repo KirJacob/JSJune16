@@ -1,4 +1,3 @@
-
 //***** SeaWar *****//
 function createArray(number){
   var array = new Array(number);
@@ -248,8 +247,3 @@ for (var i = 1; i <= 2; i++){
    console.log(printEnemyArray(array));
 
 //console.log(arrayShootHistory.toString());
-
-
-
-
-
