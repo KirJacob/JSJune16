@@ -1,0 +1,107 @@
+<head>
+<style>
+.fclass{
+  color:darkgreen;
+  background:lightyellow;
+}
+.buttons{
+  color:blue;
+  font-size:20px;
+}
+</style>
+
+<script>
+
+function figure(type,side){
+ this.type=type;
+ this.side=side;
+ this.square=function square(){
+  if (type='square') return side*side;
+  if (type='circle') return roundTo(side*side*Math.PI/4,2);
+ };
+ this.perimeter=function perimeter(){
+  if (type='square') return 4*side;
+  
+ };
+}
+
+function clickMe4(){
+var figType;
+var figSquare=0;
+var figPerimeter=0;
+
+var lengthVal=document.getElementById("length").value;
+document.getElementById("lengthSide").innerHTML=lengthVal;
+
+if (document.getElementById("fSquare").checked) {
+var figC = new figure('square',lengthVal);
+figType="Square";
+figSquare=figC.square();
+figPerimeter=figC.perimeter();
+}
+
+if (document.getElementById("fCircle").checked) {
+figType="Circle";
+figSquare=lengthVal*lengthVal*Math.PI/4;
+figSquare=roundTo(figSquare,2);
+figPerimeter=lengthVal*Math.PI;
+figPerimeter=roundTo(figPerimeter,2);
+}
+
+if (document.getElementById("fTriangle").checked) {
+figType="Triangle";
+figSquare=lengthVal*lengthVal*Math.sqrt(3)/4;
+figSquare=roundTo(figSquare,2);
+figPerimeter=3*lengthVal;
+}
+
+document.getElementById("figuretype").innerHTML=figType;
+document.getElementById("square").innerHTML=figSquare
+document.getElementById("perimeter").innerHTML=figPerimeter;
+
+}
+
+function roundTo(number,digits){
+var result;
+var degree=Math.pow(10,digits);
+result=Math.floor(number*degree)/degree;
+return result;
+}
+
+function rnd(){
+document.getElementById("rnd1").innerHTML=roundTo(2.1321,2);
+}
+</script>
+
+</head>
+
+<body>
+<div class="fclass">
+<hr>
+<button onclick="clickMe4()" type="button" class="buttons">Figure</button>
+<p>
+  <input type="radio" id="fSquare" name="figure" value="square"> Square</input>
+  <input type="radio" id="fCircle" name="figure" value="circle"> Circle</input>
+  <input type="radio" id="fTriangle" name="figure" value="triangle"> Triangle</input>
+<p>
+
+<i>Enter length</i>
+<input id="length" type="text" class="buttons" size="8"><p>
+
+<i>Figure type: </i>
+<i id="figuretype">figure type</i><p>
+
+<i>Figure side: </i>
+<i id="lengthSide">length side</i><p>
+
+<i>Perimeter : </i>
+<i id="perimeter">perimeter</i><p>
+
+<i>Square : </i>
+<i id="square">square</i><p>
+
+<hr>
+ 
+</div>
+
+</body>
