@@ -1,0 +1,241 @@
+<head>
+<style>
+.fclass{
+  color:darkgreen;
+  background:lightyellow;
+}
+.buttons{
+  color:blue;
+  font-size:20px;
+}
+</style>
+
+<script>
+
+/*
+str=str+"i="+i+"r="+
+result+"<br>";
+document.getElementById("id3").
+innerHTML=str;
+Math.floor((Math.random() * 10) + 1);
+*/
+
+function isOdd(number){
+    if ((number%2)==0) 
+     return true;
+     else return false;
+  }
+function isEasy(number){
+    var result=true;
+    for (i=2;i<number;i++){
+     if ((number%i)==0) 
+      result=false;
+    }
+    return result;
+  }
+function easyNumArray(number){
+    var result=[1];
+    var counter=0;
+    for (i=1;i<=number;i++){
+      if (isEasy(i)){
+        counter++;
+        result[counter]=i;
+      }
+    }
+    return result;
+  }
+function arraySum(array){
+    var range=array.length;
+    var result=0;
+    for (i=0;i<range;i++){
+      result=result+array[i];
+    }
+    return result;
+  }
+function easyNumSumArray(number){
+  var result=[1];
+  var sum=1;
+  var array=
+  easyNumArray(number);
+  for (i=1;i<array.length;i++){
+    sum=sum+array[i]
+    result[i]=sum;
+  }
+  return result;
+}
+function invertArray(arr){
+    var buffer=0;
+    var k=arr.length;
+    for (i=0;i<(k-1)/2;i++){
+     buffer=arr[i];
+     arr[i]=arr[k-i-1];
+     arr[k-i-1]=buffer;
+    }
+    return arr;
+  }
+function randomArr(range,num){
+ var array=[0];
+ for (i=0;i<range;i++){
+ array[i]=Math.floor((
+ Math.random() * num) + 1);
+ }
+ return array;
+}
+function sortedArrayInc(array){
+ var arr=array;
+ var k=arr.length;
+ var buffer;
+ for (i=0;i<k;i++){
+  for (j=0;j<(k-i);j++){
+   if (arr[j]>arr[j+1]){
+    buffer=arr[j];
+    arr[j]=arr[j+1];
+    arr[j+1]=buffer;
+   }
+  }
+ }
+ return arr;
+}
+function sortedArrayDec(array){
+ var arr=array;
+ var k=arr.length;
+ var buffer;
+ for (i=0;i<k;i++){
+  for (j=0;j<(k-i);j++){
+   if (arr[j]<arr[j+1]){
+    buffer=arr[j];
+    arr[j]=arr[j+1];
+    arr[j+1]=buffer;
+   }
+  }
+ }
+ return arr;
+}
+function numDividers(number){
+ var result=[0];
+ var counter=0;
+ for (i=1;i<number;i++){
+  if ((number%i)==0){
+   result[counter]=i;
+   counter++;
+  }
+ }
+ return result;
+}
+function sumDividers(number){
+ var result=0;
+ for (i=1;i<number;i++){
+  if ((number%i)==0){
+   result=result+i;
+  }
+ }
+ return result;
+}
+
+
+function perfectNumbers(rangeX){
+ var result=[0];
+ var counter=0;
+ for (i=1;i<=rangeX;i++){
+  if (sumDividers(i)==i){
+  result[counter]=i;
+  counter++;
+  }
+ }
+ return result;
+}
+
+function clickMe1(){
+
+var easyNum=document.
+getElementById("input1").value;
+
+document.getElementById("output1").innerHTML=easyNum;
+
+document.getElementById("output2").innerHTML=easyNumArray(easyNum);
+
+document.getElementById("output3").innerHTML=arraySum(easyNumArray(easyNum));
+
+document.getElementById("output4").
+innerHTML=easyNumSumArray(easyNum);
+}
+function clickMe2(){
+var arrRange=document.
+getElementById("input2").value;
+var maxNum=document.
+getElementById("input3").value;
+
+var arrayV=randomArr(arrRange,maxNum);
+document.getElementById("output5").
+innerHTML=arrayV;
+document.getElementById("output6").
+innerHTML=invertArray(arrayV);
+document.getElementById("output7").
+innerHTML=sortedArrayInc(arrayV);
+document.getElementById("output8").innerHTML=sortedArrayDec(arrayV);
+}
+
+function clickMe3(){
+var numForDiv=document.
+getElementById("input4").value;
+document.getElementById("output9").innerHTML=
+numDividers(numForDiv);
+document.getElementById("output10").innerHTML=arraySum(numDividers(numForDiv));
+
+var rangePerfect=document.
+getElementById("input5").value;
+document.getElementById("output11").innerHTML=perfectNumbers(rangePerfect);
+}
+
+</script>
+
+</head>
+<body>
+<div class="fclass">
+
+<hr>
+<button onclick="clickMe1()" type="button" class="buttons"> Easy Numbers</button>
+<p>Range</>
+<input id="input1" type="text" class="buttons" size="10">
+<p id="label1">Number</p>
+<p id="output1"></p>
+<p id="label2">Array of Easy numbers </p>
+<p id="output2"></p>
+<p id="label3">Sum of easy numbers</p>
+<p id="output3"></p>
+<p id="label4">Array of Sum</p>
+<p id="output4"></p>
+<hr>
+
+<button onclick="clickMe2()" type="button" class="buttons"> Arrays</button>
+<p>Array Range\Max number</>
+<p></p>
+<input id="input2" type="text" class="buttons" size="4">
+<input id="input3" type="text" class="buttons" size="4">
+<p id="label5">Array</p>
+<p id="output5"></p>
+<p id="label6">Inverted Array</p>
+<p id="output6"></p>
+<p id="label7">Sorted Array</p>
+<p id="output7"></p>
+<p id="output8"></p>
+
+<hr>
+<button onclick="clickMe3()" type="button" class="buttons">Dividers</button>
+<p>Enter Number</>
+<input id="input4" type="text" class="buttons" size="10">
+<p id="label9">Number Dividers</p>
+<p id="output9"></p>
+<p id="label10">Sum of Dividers</p>
+<p id="output10"></p>
+<p>Perfect Number Range</>
+<input id="input5" type="text" class="buttons" size="10">
+<p id="label11">Perfect Numbers</p>
+<p id="output11"></p>
+
+<hr>
+
+</div>
+
+
+</body>
