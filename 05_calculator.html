@@ -1,0 +1,202 @@
+<head>
+<style>
+.fclass{
+ color:darkgreen;
+ background:lightyellow;
+}
+.buttons{
+ color:blue;
+ font-size:80px;
+}
+button{
+ color:blue;
+ font-size:80px;
+}
+.d{
+ color:blue;
+ font-size:120px;
+ text-align:right;
+}
+table,td{
+ padding:5px;
+}
+</style>
+<script>
+ var disp="";
+ var size=0;
+ var number1;
+ var number2;
+ var operationType='Add';
+ var memo="";
+ var numberType='int';
+function click1(){
+disp=disp+"1";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click2(){
+disp=disp+"2";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function clickC(){
+disp=disp.substr(0,size-1);
+size=size-1;
+document.getElementById("display").innerHTML=disp;
+}
+function click3(){
+disp=disp+"3";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click4(){
+disp=disp+"4";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click5(){
+disp=disp+"5";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click6(){
+disp=disp+"6";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click7(){
+disp=disp+"7";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click8(){
+disp=disp+"8";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click9(){
+disp=disp+"9";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function click0(){
+disp=disp+"0";
+size=size+1;
+document.getElementById("display").innerHTML=disp;
+}
+function clickPlus(){
+number1=parseFloat(disp);
+operationType="Add";
+clickR();
+}
+function clickMinus(){
+number1=parseInt(disp);
+operationType="Minus";
+clickR();
+}
+function clickMultiply(){
+number1=parseInt(disp);
+operationType="Multiply";
+clickR();
+}
+function clickDivide(){
+number1=parseInt(disp);
+operationType="Divide";
+clickR();
+}
+function clickEqual(){
+var result;
+number2=parseFloat(disp);
+switch(operationType){
+ case 'Add':
+ result=number1+number2;
+ break;
+ case 'Minus':
+ result=number1-number2;
+ break;
+ case 'Multiply':
+ result=number1*number2;
+ break;
+ case 'Divide':
+ result=number1/number2;
+ break;
+ default:
+ break;
+}
+disp=result;
+document.getElementById("display").innerHTML=disp;
+}
+function clickR(){
+disp="";
+size=0;
+document.getElementById("display").innerHTML=0;
+}
+function clickMemoIn(){
+ memo=disp;
+}
+function clickMemoOut(){
+ disp=memo;
+document.getElementById("display").innerHTML=disp;
+}
+function clickPoint(){
+ disp=disp+'.';
+ size=size+1;
+ numberType="float";
+document.getElementById("display").innerHTML=disp;
+}
+</script>
+</head>
+
+<body>
+<div class="fclass">
+
+<table border=10 
+style="border:10px solid blue;
+text-align:center;border-collapse:collapse;
+padding:30px;border-spacing:10px;">
+<caption class='buttons'>Calculator</caption>
+<tr>
+<td colspan=4>
+<p id="display" class="d">0</p>
+</td>
+</tr>
+
+ <tr>
+ <td><button onclick="click1()">1</button></td>
+ <td><button onclick="click2()" >2</button></td>
+ <td><button onclick="click3()">3</button></td>
+ <td><button onclick="clickPlus()">+</button></td>
+ </tr>
+
+<tr>
+ <td><button onclick="click4()">4</button></td>
+ <td><button onclick="click5()">5</button></td>
+ <td><button onclick="click6()">6</button></td>
+ <td><button onclick="clickMinus()">-</button></td>
+ </tr>
+<tr>
+ <td><button onclick="click7()">7</button></td>
+ <td><button onclick="click8()">8</button></td>
+ <td><button onclick="click9()">9</button></td>
+ <td><button onclick="clickMultiply()">*</button></td>
+ </tr>
+
+<tr>
+ <td><button onclick="click0()">0</button></td>
+ <td><button onclick="clickEqual()">=</button></td>
+ <td><button onclick="clickC()">C</button></td>
+ <td><button onclick="clickDivide()">/</button></td>
+ </tr>
+
+<tr>
+ <td><button onclick="clickR()">R</button></td>
+ <td><button onclick="clickPoint()">.</button></td>
+ <td><button onclick="clickMemoIn()">M</button></td>
+ <td><button onclick="clickMemoOut()">m</button></td>
+ </tr>
+
+</table>
+
+</div>
+
+</body>
